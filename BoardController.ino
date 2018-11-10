@@ -32,12 +32,23 @@ int left(String message);
 int backward(String message);
 int honk(String message);
 
-int speakerPin = 12;
+// Defines pins used
+int speakerPin = 13;
+int trigPin = 12;
+int echoPin = 14;
+
+// Defines variables
+long duration;
+int distance;
 
 void setup(void)
 {
   // Start Serial
   Serial.begin(115200);
+
+  // Init proximity sensor
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
   // Init motor shield
   AFMS.begin();
@@ -73,6 +84,23 @@ void setup(void)
 }
 
 void loop() {
+  //Handle Proximity Sensor
+
+  digitalWrite(trigPin, LOW);// Clears the trigPin
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);// Sets the trigPin on HIGH state for 10 micro seconds
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);  // Reads the echoPin, returns the sound wave travel time in microseconds
+  distance= duration*0.034/2;   // Calculating the distance
+  Serial.print("Distance: ");   // Prints the distance on the Serial Monitor
+  Serial.println(distance);
+  if(distance < 5){
+    Serial.print("STOPPPP");
+    honk("");
+    stop("");
+    delay(500);
+  }
 
   // Handle REST calls
   WiFiClient client = server.available();
@@ -96,37 +124,37 @@ int stop(String command) {
 
 int forward(String command) {
   // Stop
-  L_MOTOR->setSpeed(200);
+  L_MOTOR->setSpeed(50);
   L_MOTOR->run( FORWARD );
 
-  R_MOTOR->setSpeed(200);
+  R_MOTOR->setSpeed(50);
   R_MOTOR->run( FORWARD );
 }
 
 int left(String command) {
   // Stop
-  L_MOTOR->setSpeed(100);
+  L_MOTOR->setSpeed(50);
   L_MOTOR->run( BACKWARD );
 
-  R_MOTOR->setSpeed(100);
+  R_MOTOR->setSpeed(50);
   R_MOTOR->run( FORWARD );
 }
 
 int right(String command) {
   // Stop
-  L_MOTOR->setSpeed(100);
+  L_MOTOR->setSpeed(50);
   L_MOTOR->run( FORWARD );
 
-  R_MOTOR->setSpeed(100);
+  R_MOTOR->setSpeed(50);
   R_MOTOR->run( BACKWARD );
 }
 
 int backward(String command) {
   // Stop
-  L_MOTOR->setSpeed(150);
+  L_MOTOR->setSpeed(50);
   L_MOTOR->run( BACKWARD );
 
-  R_MOTOR->setSpeed(150);
+  R_MOTOR->setSpeed(50);
   R_MOTOR->run( BACKWARD );
 }
 
