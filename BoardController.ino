@@ -15,8 +15,8 @@ Adafruit_DCMotor *R_MOTOR = AFMS.getMotor(2);
 aREST rest = aREST();
 
 // WiFi parameters
-const char* ssid = "3kidsforus";
-const char* password = "momisbest";
+const char* ssid = "wincity_boyz";
+const char* password = "114941mr";
 
 // The port to listen for incoming TCP connections 
 #define LISTEN_PORT           80
