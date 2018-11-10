@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 
-    // Device
-    var address = "192.168.1.203";
+    // Device192.168.1.133
+    var address = "192.168.1.133";
     var device = new Device(address);
 
     // Buttons
@@ -35,6 +35,30 @@ $( document ).ready(function() {
 
     $('#honk').mousedown(function() {
       device.callFunction("honk");
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 37) {
+           device.callFunction("left");
+        }
+        else if(event.keyCode == 39) {
+            device.callFunction("right");
+        }
+        else if(event.keyCode == 40) {
+            device.callFunction("backward");
+        }
+        else if(event.keyCode == 38) {
+            device.callFunction("forward");
+        }
+        else if(event.keyCode == 32) {
+            device.callFunction("honk");
+        }
+
+    });
+    document.addEventListener('keyup', function(event) {
+        if(event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 || event.keyCode == 40) {
+            device.callFunction("stop");
+        }
     });
 
 });
