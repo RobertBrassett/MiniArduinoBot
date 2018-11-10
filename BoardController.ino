@@ -32,7 +32,7 @@ int left(String message);
 int backward(String message);
 int honk(String message);
 
-int speakerPin = 14;
+int speakerPin = 12;
 
 void setup(void)
 {
@@ -83,62 +83,51 @@ void loop() {
     delay(1);
   }
   rest.handle(client);
-
 }
 
 int stop(String command) {
-
   // Stop
   L_MOTOR->setSpeed(0);
   L_MOTOR->run( RELEASE );
 
   R_MOTOR->setSpeed(0);
   R_MOTOR->run( RELEASE );
-
 }
 
 int forward(String command) {
-
   // Stop
   L_MOTOR->setSpeed(200);
   L_MOTOR->run( FORWARD );
 
   R_MOTOR->setSpeed(200);
   R_MOTOR->run( FORWARD );
-
 }
 
 int left(String command) {
-
   // Stop
   L_MOTOR->setSpeed(100);
   L_MOTOR->run( BACKWARD );
 
   R_MOTOR->setSpeed(100);
   R_MOTOR->run( FORWARD );
-
 }
 
 int right(String command) {
-
   // Stop
   L_MOTOR->setSpeed(100);
   L_MOTOR->run( FORWARD );
 
   R_MOTOR->setSpeed(100);
   R_MOTOR->run( BACKWARD );
-
 }
 
 int backward(String command) {
-
   // Stop
   L_MOTOR->setSpeed(150);
   L_MOTOR->run( BACKWARD );
 
   R_MOTOR->setSpeed(150);
   R_MOTOR->run( BACKWARD );
-
 }
 
 int honk(String command){
