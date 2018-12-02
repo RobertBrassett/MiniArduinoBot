@@ -1,41 +1,42 @@
 $( document ).ready(function() {
-
-    // Device192.168.1.133
+    // Devices IP: 192.168.1.133
     var address = "192.168.1.133";
     var device = new Device(address);
 
     // Buttons
-    $('#forward').mousedown(function() {
-      device.callFunction("forward");
+    $('#forward').mousedown(function () {
+        console.debug(document.getElementById("mySelect").value);
+        device.callFunction("forward");
     });
-    $('#forward').mouseup(function() {
-      device.callFunction("stop");
-    });
-
-    $('#right').mousedown(function() {
-      device.callFunction("right");
-    });
-    $('#right').mouseup(function() {
-      device.callFunction("stop");
+    $('#forward').mouseup(function () {
+        device.callFunction("stop");
     });
 
-    $('#left').mousedown(function() {
-      device.callFunction("left");
+    $('#right').mousedown(function () {
+        device.callFunction("right");
     });
-    $('#left').mouseup(function() {
-      device.callFunction("stop");
-    });
-
-    $('#backward').mousedown(function() {
-      device.callFunction("backward");
-    });
-    $('#backward').mouseup(function() {
-      device.callFunction("stop");
+    $('#right').mouseup(function () {
+        device.callFunction("stop");
     });
 
-    $('#honk').mousedown(function() {
-      device.callFunction("honk");
+    $('#left').mousedown(function () {
+        device.callFunction("left");
     });
+    $('#left').mouseup(function () {
+        device.callFunction("stop");
+    });
+
+    $('#backward').mousedown(function () {
+        device.callFunction("backward");
+    });
+    $('#backward').mouseup(function () {
+        device.callFunction("stop");
+    });
+
+    $('#honk').mousedown(function () {
+        device.callFunction("honk");
+    });
+
 
     document.addEventListener('keydown', function(event) {
         if(event.keyCode == 37) {
@@ -60,5 +61,4 @@ $( document ).ready(function() {
             device.callFunction("stop");
         }
     });
-
 });
